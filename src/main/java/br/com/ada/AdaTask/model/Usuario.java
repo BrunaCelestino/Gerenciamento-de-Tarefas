@@ -1,12 +1,31 @@
 package br.com.ada.AdaTask.model;
+import jakarta.persistence.*;
+import jakarta.persistence.GenerationType;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.time.LocalDate;
+
+@Getter
+@Setter
+@Entity
 public class Usuario {
-//    Nome de usuário
-//            Senha
-//    Email
-//    Nome completo
-//    Endereço
-//    Data de nascimento
-//            Gênero
-//    Número de telefone
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long Id;
+
+    @Column(unique = true)
+    private String username;
+    private String senha;
+    private String email;
+    private String nomeCompleto;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "endereco_id")
+    private Endereco endereco;
+
+    private LocalDate DataDeNascimento;
+    private String genero;
+    private String telefone;
 }
