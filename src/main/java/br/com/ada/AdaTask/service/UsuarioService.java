@@ -25,7 +25,7 @@ public class UsuarioService {
     }
 
     public String deletar(Long id) {
-        Usuario usuario = usuarioRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+        Usuario usuario = usuarioRepository.findById(id).orElse(null);
 
         if (usuario != null) {
             usuarioRepository.delete(usuario);
@@ -50,5 +50,9 @@ public class UsuarioService {
         usuarioRepository.save(usuarioFound);
 
         return usuarioFound;
+    }
+
+    public List<Usuario> encontrarPorNomeOuUsuario(String filtro) {
+        return (List<Usuario>) usuarioRepository.findByNomeCompletoOrUsernameContainingIgnoreCase(filtro);
     }
 }

@@ -28,6 +28,11 @@ public class UsuarioController {
         return usuarioService.buscarPorId(id);
     }
 
+    @GetMapping("/usuarios")
+    public List<Usuario> buscarPorNomeOuUsuario(@RequestParam String nome) {
+        return usuarioService.encontrarPorNomeOuUsuario(nome);
+    }
+
     @DeleteMapping("/usuarios/{id}")
     public String deletarUsuario(@PathVariable Long id) {
         return usuarioService.deletar(id);
@@ -37,4 +42,5 @@ public class UsuarioController {
     public Usuario atualizarUsuario(@RequestBody Usuario usuario, @PathVariable Long id) {
         return usuarioService.atualizar(usuario, id);
     }
+
 }
