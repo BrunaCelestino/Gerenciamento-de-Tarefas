@@ -52,7 +52,7 @@ public class UsuarioService {
         return usuarioFound;
     }
 
-    public List<Usuario> encontrarPorNomeOuUsuario(String filtro) {
-        return (List<Usuario>) usuarioRepository.findByNomeCompletoOrUsernameContainingIgnoreCase(filtro);
+    public List<Usuario> encontrarPorNome(String filtro) {
+        return (List<Usuario>) usuarioRepository.findByNomeCompletoContainingIgnoreCase(filtro);
     }
 }

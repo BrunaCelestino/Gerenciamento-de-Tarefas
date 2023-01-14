@@ -10,8 +10,11 @@ import java.util.List;
 @RestController
 public class UsuarioController {
 
-    @Autowired
-    private UsuarioService usuarioService;
+    private final UsuarioService usuarioService;
+
+    public UsuarioController(UsuarioService usuarioService) {
+         this.usuarioService = usuarioService;
+    }
 
     @PostMapping("/usuarios")
     public Usuario salvar(@RequestBody Usuario usuario) {
@@ -28,9 +31,9 @@ public class UsuarioController {
         return usuarioService.buscarPorId(id);
     }
 
-    @GetMapping("/usuarios")
-    public List<Usuario> buscarPorNomeOuUsuario(@RequestParam String nome) {
-        return usuarioService.encontrarPorNomeOuUsuario(nome);
+    @GetMapping("/usuarios/")
+    public List<Usuario> buscarPorNome(@RequestParam String nome) {
+        return usuarioService.encontrarPorNome(nome);
     }
 
     @DeleteMapping("/usuarios/{id}")
