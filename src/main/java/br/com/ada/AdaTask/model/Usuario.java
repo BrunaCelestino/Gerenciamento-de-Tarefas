@@ -1,4 +1,5 @@
 package br.com.ada.AdaTask.model;
+import br.com.ada.AdaTask.model.enums.Genero;
 import jakarta.persistence.*;
 import jakarta.persistence.GenerationType;
 import lombok.Getter;
@@ -18,6 +19,7 @@ public class Usuario {
     @Column(unique = true)
     private String username;
     private String senha;
+    @Column(unique = true)
     private String email;
     private String nomeCompleto;
 
@@ -26,6 +28,6 @@ public class Usuario {
     private Endereco endereco;
 
     private LocalDate DataDeNascimento;
-    private String genero;
+    private Genero genero;
     private String telefone;
 }
