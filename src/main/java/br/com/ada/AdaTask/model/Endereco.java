@@ -1,9 +1,6 @@
 package br.com.ada.AdaTask.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,13 +11,18 @@ public class Endereco {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
-    private String cep;
+
+    @Column(unique = true)
     private String logradouro;
     private String numero;
     private String bairro;
+    private String cep;
     private String cidade;
     private String estado;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
 
 
 }
