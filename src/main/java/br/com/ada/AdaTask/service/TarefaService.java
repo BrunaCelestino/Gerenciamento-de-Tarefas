@@ -1,17 +1,21 @@
 package br.com.ada.AdaTask.service;
 
 import br.com.ada.AdaTask.model.Tarefa;
-import br.com.ada.AdaTask.model.enums.Status;
+
+import br.com.ada.AdaTask.model.Usuario;
 import br.com.ada.AdaTask.repository.TarefaRepository;
+import br.com.ada.AdaTask.repository.UsuarioRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.Scanner;
+
 
 @Service
 public class TarefaService {
     private final TarefaRepository tarefaRepository;
+
 
     public TarefaService(TarefaRepository tarefaRepository) {
         this.tarefaRepository = tarefaRepository;
@@ -34,24 +38,22 @@ public class TarefaService {
 
         if (tarefa != null) {
             tarefaRepository.delete(tarefa);
-            return "Usuário: " + tarefa.getNome()  + ", deletada com sucesso!";
+            return "Tarefa: " + tarefa.getNome()  + ", deletada com sucesso!";
         } else {
-            return "Usuário não encontrado!";
+            return "Tarefa não encontrada!";
         }
     }
-    public String recuperar(Long id){
-        return tarefaRepository.findById(id).toString();
+    public Tarefa recuperar(Long id){
+        return tarefaRepository.findById(id).orElseThrow(IllegalArgumentException::new);
     }
 
-    public String atualizar(Tarefa tarefa){
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Digite a nova descricao: ");
-        String novaDescricao = sc.nextLine();
+    public String atualizar(Tarefa tarefa, Long id){
+        Tarefa tarefaFound = tarefaRepository.findById(id).orElseThrow(IllegalArgumentException::new);
 
-        System.out.println("Digite o novo status ");
-        String novoStatus = sc.nextLine();
-        tarefa.setStatus(Status.valueOf(novoStatus));
 
+        tarefaFound.setStatus(tarefa.getStatus());
+        tarefaFound.setDescricao(tarefa.getDescricao());
+        tarefaRepository.save(tarefaFound);
         return "Campos atualizados com sucesso!";
     }
 

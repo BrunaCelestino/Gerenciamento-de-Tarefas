@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/usuarios")
 public class UsuarioController {
 
     private final UsuarioService usuarioService;
@@ -16,32 +17,32 @@ public class UsuarioController {
          this.usuarioService = usuarioService;
     }
 
-    @PostMapping("/usuarios")
+    @PostMapping
     public Usuario salvar(@RequestBody Usuario usuario) {
         return usuarioService.salvar(usuario);
     }
 
-    @GetMapping("/usuarios")
+    @GetMapping
     public List<Usuario> listar() {
         return usuarioService.listar();
     }
 
-    @GetMapping("/usuarios/{id}")
+    @GetMapping("/{id}")
     public Usuario buscarPorId(@PathVariable Long id) {
         return usuarioService.buscarPorId(id);
     }
 
-    @GetMapping("/usuarios/")
+    @GetMapping("/")
     public List<Usuario> buscarPorNome(@RequestParam String nome) {
         return usuarioService.encontrarPorNome(nome);
     }
 
-    @DeleteMapping("/usuarios/{id}")
+    @DeleteMapping("/{id}")
     public String deletarUsuario(@PathVariable Long id) {
         return usuarioService.deletar(id);
     }
 
-    @PutMapping("/usuarios/{id}")
+    @PutMapping("/{id}")
     public Usuario atualizarUsuario(@RequestBody Usuario usuario, @PathVariable Long id) {
         return usuarioService.atualizar(usuario, id);
     }

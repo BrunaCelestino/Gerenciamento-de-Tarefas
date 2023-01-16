@@ -24,7 +24,7 @@ public class Tarefa {
     private LocalDateTime dataDeVencimento;
     private Prioridade prioridade;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "usuario_id")
     private Usuario responsavel;
     private String projeto;

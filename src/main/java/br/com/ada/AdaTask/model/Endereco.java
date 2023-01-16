@@ -20,9 +20,9 @@ public class Endereco {
     private String cidade;
     private String estado;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "usuario_id")
-    private Usuario usuario;
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "usuario_id")
+//    private Usuario usuario;
 
 
 }

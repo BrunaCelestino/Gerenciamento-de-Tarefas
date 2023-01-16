@@ -26,25 +26,25 @@ public class TarefaController {
     }
 
     //duvida aqui
-    /*
-    @GetMapping("/{id}")
-    public Usuario buscarPorUsuario(@PathVariable Long id) {
-        return tarefaService.buscarPorUsuario(id);
-    } */
 
-    @DeleteMapping("{id}")
+    @GetMapping("/usuario/{id}")
+    public List<Tarefa> buscarPorUsuario(@PathVariable Long id) {
+        return tarefaService.buscarPorUsuario(id);
+    }
+
+    @DeleteMapping("/{id}")
     public String excluir(@PathVariable Long id) {
         return tarefaService.excluir(id);
     }
 
     @GetMapping("/{id}")
-    public String recuperar(@PathVariable Long id) {
+    public Tarefa recuperar(@PathVariable Long id) {
         return tarefaService.recuperar(id);
     }
 
-    @PostMapping
-    public String atualizar(@RequestBody Tarefa tarefa){
-        return tarefaService.atualizar(tarefa);
+    @PutMapping("/{id}")
+    public String atualizar(@RequestBody Tarefa tarefa, @PathVariable Long id){
+        return tarefaService.atualizar(tarefa, id);
     }
 
 }

@@ -4,9 +4,10 @@ package br.com.ada.AdaTask.service;
 import br.com.ada.AdaTask.model.Endereco;
 import br.com.ada.AdaTask.repository.EnderecoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class EnderecoService {
     @Autowired
     private EnderecoRepository enderecoRepository;
@@ -55,6 +56,6 @@ public class EnderecoService {
         return enderecoFound;
     }
     public List<Endereco> encontrarPorCEP(String filtro) {
-        return (List<Endereco>) enderecoRepository.findByCEPContainingIgnoreCase(filtro);
+        return (List<Endereco>) enderecoRepository.findByCepContainingIgnoreCase(filtro);
     }
 }
